@@ -1,0 +1,1 @@
+A solution could be to only allow one routine to call `Stop()` at any given time, by using the `sync/atomic` package. This ensures that that memory can only be accessed by one routine at a time. If we detect that the consumer has already been stopped (or is stopping), we won't stop it again.

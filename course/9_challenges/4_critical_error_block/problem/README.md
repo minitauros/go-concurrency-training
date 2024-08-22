@@ -1,0 +1,3 @@
+With a concurrency of 4, the routine that runs `Start()` might fetch 4 messages from Kafka and send them into the work channel. It may then fetch a 5th message from Kafka and try to send that as well. However, since all the worker routines are busy, the code will block there until one routine tries to load a new message from the work channel.
+
+Imagine that a critical error happens in ALL of the worker routines. Each routine will try to send an error on the critical error channel. However, the routine that is reading the critical error channel is blocked, because it is trying to send work to one of the workers. This is another eternal block situation.

@@ -1,0 +1,1 @@
+This directory contains several chapters to go through. Each of them contains a readme with instructions on what to do.
