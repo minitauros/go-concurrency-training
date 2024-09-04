@@ -6,7 +6,7 @@ import (
 
 func SumConcurrentUsingMutex(input []int) int {
 	mux := &sync.Mutex{}
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 
 	var sum int
 	for _, num := range input {

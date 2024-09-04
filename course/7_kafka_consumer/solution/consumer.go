@@ -25,8 +25,8 @@ type Consumer struct {
 	gracefulShutdownWg *sync.WaitGroup
 	// workCh is the channel on which we will send messages to be handled.
 	workCh chan kafka.Message
-	// concurrencyCh is used to make sure that we don't pick up more work than we can handle.
-	concurrencyCh chan struct{}
+	// workerReadyCh is used to make sure that we don't pick up more work than we can handle.
+	workerReadyCh chan struct{}
 	// criticalErrCh is the channel that errors are sent on that should stop the consumer.
 	criticalErrCh chan error
 	// stopCh is a channel that will be closed once the consumer is stopped, so that we can orchestrate
@@ -40,7 +40,7 @@ func NewConsumer(reader *kafka.Reader, concurrency int) *Consumer {
 		reader:             reader,
 		handlers:           make(map[string]HandlerFn),
 		concurrency:        concurrency,
-		concurrencyCh:      make(chan struct{}, concurrency),
+		workerReadyCh:      make(chan struct{}, concurrency),
 		gracefulShutdownWg: &sync.WaitGroup{},
 		workCh:             make(chan kafka.Message),
 		criticalErrCh:      make(chan error, concurrency),
@@ -55,10 +55,6 @@ func (c *Consumer) SetHandler(topicName string, handler HandlerFn) {
 func (c *Consumer) Start() error {
 	c.startWorkers()
 
-	for i := 0; i < c.concurrency; i++ {
-		c.concurrencyCh <- struct{}{}
-	}
-
 	for {
 		select {
 		case <-c.stopCh:
@@ -69,7 +65,7 @@ func (c *Consumer) Start() error {
 				return errors.Join(err, stopErr)
 			}
 			return err
-		case <-c.concurrencyCh:
+		case c.workerReadyCh <- struct{}{}: // Only try to fetch a new message from Kafka if there is a worker ready to handle it.
 			msg, err := c.reader.FetchMessage(context.Background())
 			if err != nil {
 				c.criticalErrCh <- err
@@ -87,9 +83,7 @@ func (c *Consumer) startWorkers() {
 
 		go func() {
 			// Make sure that when the routine finishes we signal to the wait group that it's done.
-			defer func() {
-				c.gracefulShutdownWg.Done()
-			}()
+			defer c.gracefulShutdownWg.Done()
 
 			for {
 				select {
@@ -101,8 +95,8 @@ func (c *Consumer) startWorkers() {
 						c.criticalErrCh <- err
 					}
 
-					// Return a token to the pool so that the next message can be retrieved from Kafka.
-					c.concurrencyCh <- struct{}{}
+					// Take a token from the pool so that the next message can be retrieved from Kafka.
+					<-c.workerReadyCh
 				}
 			}
 		}()

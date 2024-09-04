@@ -1,9 +1,9 @@
 package concurrency
 
+import (
+	"github.com/minitauros/go-concurrency-training/course/3_goroutines/solutions"
+)
+
 func sumConcurrent(input []int) int {
-	var sum int
-	for _, number := range input {
-		sum += number
-	}
-	return sum
+	return solutions.SumConcurrentUsingAtomic(input)
 }

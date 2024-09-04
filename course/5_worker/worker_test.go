@@ -19,7 +19,7 @@ func TestHandleWork(t *testing.T) {
 	}
 
 	workCh := make(chan func())
-	handleWork(2, workCh)
+	go handleWork(2, workCh)
 
 	workCh <- work1
 	workCh <- work2

@@ -5,7 +5,7 @@ import (
 )
 
 func SumConcurrentUsingWaitGroup(input []int) int {
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 
 	var sum int
 	for _, num := range input {

@@ -24,6 +24,6 @@ func SumConcurrentUsingChannels(input []int) int {
 	// Closing of the channel will result in a `break` in the `for` loop.
 	close(inputCh)
 
-	// Wait until the result comes out of the result channel, then return the result.s
+	// Wait until the result comes out of the result channel, then return the result.
 	return <-resultCh
 }

@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"math/rand/v2"
 	"strconv"
 
 	consumer "github.com/minitauros/go-concurrency-training/course/7_kafka_consumer"
@@ -22,7 +21,7 @@ func main() {
 	for i := 0; i < 100; i++ {
 		messages[i] = kafka.Message{
 			Topic: "foo",
-			Value: msgBytes(),
+			Value: msgBytes(i),
 		}
 	}
 
@@ -30,13 +29,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("done")
+	fmt.Println("produced 100 messages to topic 'foo'")
 }
 
-func msgBytes() []byte {
+func msgBytes(num int) []byte {
 	jsonBytes, err := json.Marshal(consumer.Message{
-		Foo: "foo" + strconv.Itoa(rand.IntN(100)),
-		Bar: "bar" + strconv.Itoa(rand.IntN(100)),
+		Foo: "foo" + strconv.Itoa(num),
+		Bar: "bar" + strconv.Itoa(num),
 	})
 	if err != nil {
 		panic(err)
