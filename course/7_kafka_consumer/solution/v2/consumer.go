@@ -89,11 +89,16 @@ func (c *Consumer) Start() {
 				}
 				c.workChannels[int(e.TopicPartition.Partition)] <- e
 
+				// No need to take one from the concurrency channel here; the goroutine that is handling the work for
+				// this message's partition will do that.
+
 				// TODO Commit async.
 			case kafka.Error:
 				c.errHandler(e, c.Stop)
+				<-c.concurrencyCh
 			default:
 				// ignore the rest
+				<-c.concurrencyCh
 			}
 		}
 	}
@@ -119,8 +124,7 @@ func (c *Consumer) Stop() error {
 	// Wait for all the work to finish.
 	c.gracefulShutdownWg.Wait()
 
-	err := c.wrappedConsumer.Close()
-	if err != nil {
+	if err := c.wrappedConsumer.Close(); err != nil {
 		return err
 	}
 
@@ -142,8 +146,7 @@ func (c *Consumer) startWorkHandler(partition int) {
 		defer c.gracefulShutdownWg.Done()
 
 		for msg := range c.workChannels[partition] {
-			err := c.handlers[*msg.TopicPartition.Topic].Handle(msg.Value)
-			if err != nil {
+			if err := c.handlers[*msg.TopicPartition.Topic].Handle(msg.Value); err != nil {
 				c.errHandler(err, c.Stop)
 			}
 			<-c.concurrencyCh
