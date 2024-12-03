@@ -110,19 +110,16 @@ func (c *Consumer) Stop() error {
 		return nil
 	}
 
-	// Stop consuming messages.
 	close(c.stopCh)
 
-	// Stop all routines that are handling work.
-	for _, ch := range c.workChannels {
-		close(ch)
-	}
+	// Wait for all the workers to finish.
+	c.gracefulShutdownWg.Wait()
+
+	// Stop each handler individually for the work may be handled concurrently and this allows us to wait for that to
+	// finish.
 	for _, h := range c.handlers {
 		h.Stop()
 	}
-
-	// Wait for all the work to finish.
-	c.gracefulShutdownWg.Wait()
 
 	if err := c.wrappedConsumer.Close(); err != nil {
 		return err
@@ -145,11 +142,30 @@ func (c *Consumer) startWorkHandler(partition int) {
 	go func() {
 		defer c.gracefulShutdownWg.Done()
 
-		for msg := range c.workChannels[partition] {
-			if err := c.handlers[*msg.TopicPartition.Topic].Handle(msg.Value); err != nil {
-				c.errHandler(err, c.Stop)
+		for {
+			select {
+			case <-c.stopCh:
+				return
+			case msg := <-c.workChannels[partition]:
+				if err := c.handlers[*msg.TopicPartition.Topic].Handle(msg.Value); err != nil {
+					// The error handler must be called in a goroutine, just in case it wants to call Stop.
+					// Stop will wait for gracefulShutdownWg, and if the call to the error handler is blocking,
+					// the current goroutine will never return, and will thus never be able to signal gracefulShutdownWg
+					// that it's done.
+					//
+					// Example:
+					// Handler returns an error.
+					// Error is passed to the consumer's error handler.
+					// Error handler calls stop(), which is just a call to Stop() on the consumer.
+					// Consumer waits for all the work to finish.
+					// Work can not finish, because there is one worker closing the consumer, while closing is blocked
+					// by waiting for all the work to finish, which will never happen because of the worker that is
+					// trying to close the consumer.
+					// Deadlock.
+					go c.errHandler(err, c.Stop)
+				}
+				<-c.concurrencyCh
 			}
-			<-c.concurrencyCh
 		}
 	}()
 }
