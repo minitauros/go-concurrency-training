@@ -6,9 +6,18 @@ import (
 	"slices"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
+
+const PollInterval = 1000 * time.Millisecond
+
+type WrappedConsumer interface {
+	SubscribeTopics(topics []string, rebalanceCb kafka.RebalanceCb) (err error)
+	Poll(timeoutMs int) (event kafka.Event)
+	Close() (err error)
+}
 
 // Handler handles Kafka messages.
 type Handler interface {
@@ -21,7 +30,7 @@ type Handler interface {
 }
 
 type Consumer struct {
-	wrappedConsumer *kafka.Consumer
+	wrappedConsumer WrappedConsumer
 	handlers        map[string]Handler
 	stopCh          chan struct{}
 	stoppedCh       chan struct{}
@@ -41,7 +50,7 @@ type Consumer struct {
 }
 
 func NewConsumer(
-	consumer *kafka.Consumer,
+	consumer WrappedConsumer,
 	handlers map[string]Handler,
 	errHandler func(err error, stop func() error),
 	concurrency int,
@@ -76,7 +85,8 @@ func (c *Consumer) Start() {
 		case <-c.stopCh:
 			return
 		case c.concurrencyCh <- struct{}{}:
-			event := c.wrappedConsumer.Poll(1000)
+
+			event := c.wrappedConsumer.Poll(int(PollInterval.Milliseconds()))
 			if event == nil {
 				<-c.concurrencyCh
 				continue
