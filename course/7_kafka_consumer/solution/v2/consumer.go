@@ -146,7 +146,8 @@ func (c *Consumer) Stopped() <-chan struct{} {
 }
 
 func (c *Consumer) startWorkHandler(partition int) {
-	c.workChannels[partition] = make(chan *kafka.Message)
+	workCh := make(chan *kafka.Message)
+	c.workChannels[partition] = workCh
 	c.gracefulShutdownWg.Add(1)
 
 	go func() {
@@ -156,7 +157,7 @@ func (c *Consumer) startWorkHandler(partition int) {
 			select {
 			case <-c.stopCh:
 				return
-			case msg := <-c.workChannels[partition]:
+			case msg := <-workCh:
 				if err := c.handlers[*msg.TopicPartition.Topic].Handle(msg.Value); err != nil {
 					// The error handler must be called in a goroutine, just in case it wants to call Stop.
 					// Stop will wait for gracefulShutdownWg, and if the call to the error handler is blocking,
