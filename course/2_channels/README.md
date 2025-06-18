@@ -23,11 +23,13 @@ ch <- 1
 
 // Instead, we can spin up a goroutine that sends the value into the channel.
 go func() {
-    // This line will block until someone starts reading the channel.
+    // This line will block until someone starts reading the channel, but since it is in a goroutine, which is sort
+	// of a separate process, the program will not panic and the main program will not be blocked - only this goroutine
+	// will be blocked, until the channel is read from.
     ch <- 1
 }()
 
-// Read from the channel. This will block until a value is sent, which is done in the goroutine we've just started
+// Read from the channel. This will block until a value is sent, which is done in the goroutine we've just started,
 // so the program won't panic.
 val := <-ch
 
