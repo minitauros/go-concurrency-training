@@ -3,7 +3,8 @@ package channels
 // channels1 returns the message that is sent on messageCh.
 func channels1(messageCh chan string) string {}
 
-// channels2 ensures that whatever is received on the input channel is sent into the output channel.
+// channels2 ensures that whatever is received on the input channel (may be multiple values) is sent into the output
+// channel.
 func channels2(inputCh chan string, outputCh chan string) {
 
 }

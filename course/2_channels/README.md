@@ -25,7 +25,8 @@ ch <- 1
 go func() {
     // This line will block until someone starts reading the channel, but since it is in a goroutine, which is sort
 	// of a separate process, the program will not panic and the main program will not be blocked - only this goroutine
-	// will be blocked, until the channel is read from.
+	// will be blocked, until the channel is read from. Then the goroutine function finishes and the goroutine is
+	// cleaned up.
     ch <- 1
 }()
 
@@ -35,6 +36,14 @@ val := <-ch
 
 // Prints "val = 1".
 fmt.Println("val =", val)
+```
+
+Multiple values can be sent on a channel. You can use `for range` to read from a channel until the channel is closed.
+
+```go
+for val := range someChannel {
+	// Do something with val.
+}
 ```
 
 See also the [example](https://gobyexample.com/channels) in Go By Example.
@@ -50,3 +59,7 @@ fmt.Println("val", 1, someVal)
 // "Regular" printf. %v means "any type of value".
 fmt.Printf("val: %v\n", someVal)
 ```
+
+## AI
+
+* Explain the basics of how channels work in Go, the programming language, with some examples.
