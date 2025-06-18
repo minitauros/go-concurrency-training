@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LimitUsingSemaphore allows a burst of up to 10 callbacks to occur all at once, then allows only one callback to
+// happen per `rate`.
 func LimitUsingSemaphore(callback func() bool, rate time.Duration) {
 	limiter := make(chan struct{}, 10) // Semaphore/limiter with burst of 10.
 	stopCh := make(chan struct{})
