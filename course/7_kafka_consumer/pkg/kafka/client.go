@@ -13,6 +13,7 @@ type Message struct {
 	Body      []byte
 }
 
+// Client is a fake Kafka client.
 type Client struct {
 	offset atomic.Int64
 }

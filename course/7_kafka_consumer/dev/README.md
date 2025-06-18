@@ -1,0 +1,1 @@
+This directory contains helper tools for those talking to a real Kafka cluster.

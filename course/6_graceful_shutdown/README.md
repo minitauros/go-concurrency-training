@@ -1,6 +1,7 @@
 ## Task
 
-Make sure that as soon as `shutDown()` returns, all work has finished executing. You can modify all the functions in graceful_shutdown.go, but please do not rename them, as the test relies on them existing.
+Make sure that all work has finished executing before a call to `shutDown()` returns. You can modify all the functions
+in graceful_shutdown.go, but please do not rename them, as the test relies on them existing.
 
 Reading from a channel is done as follows:
 

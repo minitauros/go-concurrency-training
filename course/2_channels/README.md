@@ -9,6 +9,8 @@ Validate that you have implemented the solution correctly by running the tests:
 go test -v .
 ```
 
+Where `-v` means "verbose" and `.` is the current directory.
+
 Channels work as follows:
 
 ```go
@@ -25,7 +27,8 @@ go func() {
     ch <- 1
 }()
 
-// Read from the channel. This will block until a value is sent.
+// Read from the channel. This will block until a value is sent, which is done in the goroutine we've just started
+// so the program won't panic.
 val := <-ch
 
 // Prints "val = 1".

@@ -7,8 +7,6 @@ should also pass when you implement the solution correctly. You can run the test
 go test -v .
 ```
 
-Where `-v` means "verbose" and `.` is the current directory.
-
 Goroutines are easy to start. Just type `go` in front of a function call, for example:
 
 ```go
