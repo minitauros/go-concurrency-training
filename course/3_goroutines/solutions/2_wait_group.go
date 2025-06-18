@@ -4,6 +4,8 @@ import (
 	"sync"
 )
 
+// SumConcurrentUsingWaitGroup solves the problem of the program returning before all input was processed, but does
+// not protect against concurrent memory access.
 func SumConcurrentUsingWaitGroup(input []int) int {
 	wg := sync.WaitGroup{}
 
