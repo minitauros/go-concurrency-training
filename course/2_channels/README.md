@@ -41,6 +41,7 @@ fmt.Println("val =", val)
 Multiple values can be sent on a channel. You can use `for range` to read from a channel until the channel is closed.
 
 ```go
+// Loop will automatically terminate once `close(someChannel)` happens.
 for val := range someChannel {
 	// Do something with val.
 }

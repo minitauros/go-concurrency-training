@@ -28,6 +28,6 @@ func TestLimiter(t *testing.T) {
 	// 200ms is an arbitrary number. This test is flaky. A slow machine might not be able to execute as many
 	// callbacks as a fast machine.
 	if elapsed > 200*time.Millisecond {
-		t.Error("100 executions took longer than expected, even when accounting for overhead")
+		t.Error("100 executions took longer than expected (>200ms), even when accounting for overhead")
 	}
 }
