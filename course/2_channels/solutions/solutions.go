@@ -20,6 +20,7 @@ func channels3(input []string) chan string {
 		for _, in := range input {
 			ch <- in
 		}
+		close(ch)
 	}()
 
 	return ch
