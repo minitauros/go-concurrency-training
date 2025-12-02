@@ -1,11 +1,11 @@
 module github.com/minitauros/go-concurrency-training
 
-go 1.24.4
+go 1.25.4
 
 require (
-	github.com/confluentinc/confluent-kafka-go/v2 v2.10.1
-	github.com/segmentio/kafka-go v0.4.48
-	github.com/stretchr/testify v1.10.0
+	github.com/confluentinc/confluent-kafka-go/v2 v2.12.0
+	github.com/segmentio/kafka-go v0.4.49
+	github.com/stretchr/testify v1.11.1
 )
 
 require (

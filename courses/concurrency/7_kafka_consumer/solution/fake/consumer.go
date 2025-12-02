@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/minitauros/go-concurrency-training/course/7_kafka_consumer/pkg/kafka"
+	"github.com/minitauros/go-concurrency-training/courses/concurrency/7_kafka_consumer/pkg/kafka"
 )
 
 type Consumer struct {

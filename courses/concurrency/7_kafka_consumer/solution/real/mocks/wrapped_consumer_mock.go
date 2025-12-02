@@ -6,7 +6,7 @@ package mocks
 
 import (
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	mock "github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/mock"
 )
 
 // NewMockWrappedConsumer creates a new instance of MockWrappedConsumer. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.

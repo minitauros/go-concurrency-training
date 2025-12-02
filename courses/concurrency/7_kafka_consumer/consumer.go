@@ -6,7 +6,9 @@ type Consumer struct {
 }
 
 func (m *Consumer) Start() error {
+	return nil
 }
 
 func (m *Consumer) Stop() error {
+	return nil
 }

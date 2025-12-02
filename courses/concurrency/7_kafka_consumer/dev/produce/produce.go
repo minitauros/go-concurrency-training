@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strconv"
 
-	consumer "github.com/minitauros/go-concurrency-training/course/7_kafka_consumer"
+	consumer "github.com/minitauros/go-concurrency-training/courses/concurrency/7_kafka_consumer"
 	"github.com/segmentio/kafka-go"
 )
 

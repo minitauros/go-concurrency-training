@@ -1,6 +1,20 @@
 version: '3'
 tasks:
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet $(go list ./...)
   gen:
     desc: Generate helper files
     cmds:
-      - go generate ./...
+      - go generate $(go list ./...)
+  update-deps:
+    desc: Update all go.mod dependencies
+    cmds:
+      - rm -f go.mod go.sum
+      - go mod init {{.module_name}}
+      - go mod tidy
+      - go get -u -modfile=tools.mod github.com/vektra/mockery/v3
+    vars:
+      module_name:
+        sh: head -n 1 go.mod | rev | cut -d ' ' -f 1 | rev

@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/minitauros/go-concurrency-training/course/7_kafka_consumer/solution/real/mocks"
-	"github.com/minitauros/go-concurrency-training/course/7_kafka_consumer/solution/real/pkg/test"
+	"github.com/minitauros/go-concurrency-training/courses/concurrency/7_kafka_consumer/solution/real/mocks"
+	"github.com/minitauros/go-concurrency-training/courses/concurrency/7_kafka_consumer/solution/real/pkg/test"
 	assert2 "github.com/stretchr/testify/assert"
 )
 
