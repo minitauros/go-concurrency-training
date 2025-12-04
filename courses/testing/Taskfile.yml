@@ -7,3 +7,4 @@ tasks:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
       - go tool -modfile={{.ROOT_DIR}}/../../tools.mod github.com/avito-tech/go-mutesting/cmd/go-mutesting .
+      - rm -f report.json
