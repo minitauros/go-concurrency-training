@@ -1,0 +1,8 @@
+dir: '{{.InterfaceDir}}/mocks'
+filename: '{{.InterfaceName | snakecase}}_mock.go'
+pkgname: 'mocks'
+packages:
+  github.com/minitauros/go-concurrency-training/courses/testing/6_tdd:
+    interfaces:
+      Publisher:
+      UserRepo:

@@ -10,13 +10,12 @@ func SumConcurrentUsingMutex(input []int) int {
 
 	var sum int
 	for _, num := range input {
-		wg.Add(1)
-		go func() {
+		wg.Go(func() {
 			mux.Lock()
 			sum += num
 			mux.Unlock()
 			wg.Done()
-		}()
+		})
 	}
 
 	wg.Wait()

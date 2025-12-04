@@ -2,6 +2,6 @@ dir: '{{.InterfaceDir}}/mocks'
 filename: '{{.InterfaceName | snakecase}}_mock.go'
 pkgname: 'mocks'
 packages:
-  github.com/minitauros/go-concurrency-training/course/7_kafka_consumer/solution/real:
+  github.com/minitauros/go-concurrency-training/courses/concurrency/7_kafka_consumer/solution/real:
     interfaces:
       WrappedConsumer:

@@ -1,4 +1,4 @@
-## Task
+# Exercise
 
 Work will be sent on the provided work channel. Make sure that this work is executed with the given concurrency
 (e.g. if concurrency is 3, we want 3 pieces of work to be handled concurrently). You can stop listening for work as 
@@ -6,7 +6,7 @@ soon as the channel is closed.
 
 You can test your solution by running the test:
 
-```
+```shell
 go test -v .
 ```
 
@@ -28,6 +28,6 @@ for val := range myChan {
 
 The `for` loop will automatically stop once `myChan` is closed.
 
-## AI
+## AI Prompts
 
 * Explain how the worker pool pattern works in Go, the programming language.

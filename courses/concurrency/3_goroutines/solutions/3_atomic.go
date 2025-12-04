@@ -10,11 +10,10 @@ func SumConcurrentUsingAtomic(input []int) int {
 	var wg sync.WaitGroup
 
 	for _, num := range input {
-		wg.Add(1)
-		go func() {
+		wg.Go(func() {
 			sum.Add(int64(num))
 			wg.Done()
-		}()
+		})
 	}
 
 	wg.Wait()

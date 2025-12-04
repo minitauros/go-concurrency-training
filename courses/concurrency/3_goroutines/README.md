@@ -1,8 +1,8 @@
-## Task
+# Exercise
 
 Modify `sumConcurrent` in such a way that it concurrently sums numbers. To test your result, you can run the test:
 
-```
+```shell
 go test -v .
 ```
 
@@ -25,7 +25,7 @@ You will quickly notice that multiple goroutines writing to the same variable ca
 likely run into the problem of the program returning before all goroutines have finished. To solve these issues, see 
 the AI section.
 
-## AI
+## AI Prompts
 
 * Explain how the atomic package works in Go, the programming language. Specifically atomic.Int64.
 * Explain how a mutex works in Go, the programming language.

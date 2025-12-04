@@ -39,9 +39,6 @@ func TestGracefulShutdown(t *testing.T) {
 	// Allow some work to be processed.
 	time.Sleep(20 * time.Millisecond)
 
-	// First stop sending work to prevent sending work on a closed channel.
-	close(stopCh)
-
 	workStartedBeforeShutdownCount = workStartedCount.Load()
 	w.shutDown()
 	workDoneAfterShutdownCount = workDoneCount.Load()

@@ -1,11 +1,11 @@
-## Task
+# Exercise
 
 Open channels.go and implement the three functions you see there according to the function documentation (which is
 written over the function).
 
 Validate that you have implemented the solution correctly by running the tests:
 
-```
+```shell
 go test -v .
 ```
 
@@ -61,6 +61,6 @@ fmt.Println("val", 1, someVal)
 fmt.Printf("val: %v\n", someVal)
 ```
 
-## AI
+## AI Prompts
 
 * Explain the basics of how channels work in Go, the programming language, with some examples.

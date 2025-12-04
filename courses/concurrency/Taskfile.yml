@@ -1,0 +1,6 @@
+version: '3'
+tasks:
+  up:
+    desc: Spin up everything to run and test things locally.
+    cmds:
+      - docker-compose up
