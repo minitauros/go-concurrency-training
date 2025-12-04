@@ -1,4 +1,4 @@
-## Task
+# Task
 
 Modify `sumConcurrent` in such a way that it concurrently sums numbers. To test your result, you can run the test:
 

@@ -1,1 +1,12 @@
-This directory contains several chapters to go through. Each of them contains a readme with instructions on what to do.
+# Concurrency
+
+## What is concurrency
+
+Concurrency != parallelism.
+
+##
+
+## AI prompts
+
+* Explain the difference between concurrency and parallelism in software engineering and explain how this relates to
+  goroutines in Go, the programming language.

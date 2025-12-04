@@ -1,4 +1,6 @@
-This repository contains a number of exercises to practice concurrency in Go.
+This repository contains a number of courses with exercises to practice different concepts in Go. Each course itself
+contains a number of directories that contain an exercise to be done. Each exercise directory has its own README with
+instructions.
 
 ## Prerequisites
 

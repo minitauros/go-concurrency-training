@@ -1,4 +1,4 @@
-## Task
+# Task
 
 Work will be sent on the provided work channel. Make sure that this work is executed with the given concurrency
 (e.g. if concurrency is 3, we want 3 pieces of work to be handled concurrently). You can stop listening for work as 

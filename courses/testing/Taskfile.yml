@@ -1,0 +1,9 @@
+version: '3'
+includes:
+  main: ../../Taskfile.yml
+tasks:
+  test-solution:
+    desc: Spin up everything to run and test things locally.
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - go tool -modfile={{.ROOT_DIR}}/../../tools.mod github.com/avito-tech/go-mutesting/cmd/go-mutesting .
