@@ -34,8 +34,8 @@ func TestFoo(t *testing.T) {
 }
 ```
 
-First, implement the methods of `Calculator` in calculator.go. Then, using the `assert` package, write tests for the 
-implementations. The `SpecialSub()` methods has already been implemented and tested as an example.
+First, implement the methods of `Calculator` in calculator.go in the parent directory. Then, using the `assert` package,
+write tests for the implementations. The `SpecialSub()` methods has already been implemented and tested as an example.
 
 To see if your tests work, tests can be run as follows.
 

@@ -4,65 +4,16 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/minitauros/go-concurrency-training/courses/testing/4_frameworks"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_Calculator_Sum(t *testing.T) {
-	assert := assert.New(t)
-
-	testCases := []struct {
-		description string
-		inputs      []int64
-		expected    int64
-	}{
-		{
-			description: "Works with numbers above zero",
-			inputs:      []int64{1, 2, 5},
-			expected:    8,
-		},
-		{
-			description: "Works with numbers below zero",
-			inputs:      []int64{-1, -2, -4},
-			expected:    -7,
-		},
-	}
-
-	for i, tc := range testCases {
-		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
-			calculator := &Calculator{}
-			res := calculator.Sum(tc.inputs...)
-			assert.Equal(tc.expected, res)
-		})
-	}
+	// Write assertions.
 }
 
 func Test_Calculator_Multiply(t *testing.T) {
-	assert := assert.New(t)
-
-	testCases := []struct {
-		description string
-		inputs      []int64
-		expected    int64
-	}{
-		{
-			description: "Works with numbers above zero",
-			inputs:      []int64{1, 2, 5},
-			expected:    10,
-		},
-		{
-			description: "Works with numbers below zero",
-			inputs:      []int64{-1, -2, -4},
-			expected:    -8,
-		},
-	}
-
-	for i, tc := range testCases {
-		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
-			calculator := &Calculator{}
-			res := calculator.Sum(tc.inputs...)
-			assert.Equal(tc.expected, res)
-		})
-	}
+	// Write assertions.
 }
 
 func Test_Calculator_SpecialSub(t *testing.T) {
@@ -114,7 +65,7 @@ func Test_Calculator_SpecialSub(t *testing.T) {
 
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
-			calculator := &Calculator{}
+			calculator := &frameworks.Calculator{}
 			res := calculator.SpecialSub(tc.start, tc.sub)
 			assert.Equal(tc.expected, res)
 		})

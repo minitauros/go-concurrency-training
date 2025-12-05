@@ -1,13 +1,15 @@
-package frameworks_testify
+package frameworks
 
 type Calculator struct {
 }
 
 func (c *Calculator) Sum(values ...int64) int64 {
+	// Implement me correctly.
 	return 0
 }
 
 func (c *Calculator) Multiply(val, by int64) int64 {
+	// Implement me correctly.
 	return 0
 }
 
