@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 Using a table driven format for tests can make it easier to write, read, and maintain tests. Where in a typical scenario
 you would write out each test case as an individual test, when using table driven tests, you write an array of test
@@ -33,8 +33,9 @@ for i, tc := range testCases {
 }
 ```
 
-Take the tests you wrote in the previous exercise, and convert them to a table driven test. To see if your tests work,
-tests can be run as follows.
+Take the tests you wrote in the previous exercise, and convert them to a table driven test. 
+
+To see if your tests work, tests can be run as follows.
 
 ```
 go test -v .

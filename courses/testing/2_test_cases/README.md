@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 In this exercise you will find the same code as in the warmup exercise. However, the test in the warmup exercise is
 broken. It only covers the case where the input is `3`, and it doesn't even cover it correctly. Good tests cover all

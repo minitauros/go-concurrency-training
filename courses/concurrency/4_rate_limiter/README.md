@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 Write the implementation of `limit()` in limit.go in such a way that `callback` is called not more than once per
 `rate` (e.g. not more than once per millisecond). As soon as the call to `callback` returns `false`, the function must

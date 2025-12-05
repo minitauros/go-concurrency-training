@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 Make sure that all work has finished executing before a call to `shutDown()` returns. You can modify all the functions
 in graceful_shutdown.go, but please do not rename them, as the test relies on them existing.

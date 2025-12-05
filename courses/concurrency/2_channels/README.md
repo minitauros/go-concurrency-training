@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 Open channels.go and implement the three functions you see there according to the function documentation (which is
 written over the function).

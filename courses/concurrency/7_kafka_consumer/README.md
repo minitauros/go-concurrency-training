@@ -1,4 +1,4 @@
-# Task
+# Exercise
 
 Write an implementation for `Consumer`. You can use the fake Kafka client in ./pkg/kafka/client.go to fetch messages.
 Alternatively, you can talk to a real (local) Kafka cluster - see the "challenges" section.
