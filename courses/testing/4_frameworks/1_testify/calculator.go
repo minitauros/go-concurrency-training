@@ -11,10 +11,6 @@ func (c *Calculator) Multiply(val, by int64) int64 {
 	return 0
 }
 
-func (c *Calculator) Sub(val, sub int64) int64 {
-	return 0
-}
-
 func (c *Calculator) SpecialSub(val, sub int64) int64 {
 	if val > 100 {
 		if val == 110 {
