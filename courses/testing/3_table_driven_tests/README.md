@@ -1,6 +1,8 @@
 # Task
 
-Using a table driven format for tests can make it easier to write, read, and maintain tests. Where in a typical scenario you would write out each test case as an individual test, when using table driven tests, you write an array of test inputs and expected outputs and run them all in a loop. For example:
+Using a table driven format for tests can make it easier to write, read, and maintain tests. Where in a typical scenario
+you would write out each test case as an individual test, when using table driven tests, you write an array of test
+inputs and expected outputs and run them all in a loop. For example:
 
 ```go
 type input struct {
@@ -15,7 +17,7 @@ testCases := []struct {
 	expected    expected
 }{
     {
-        description: "Some test case",
+        description: "If input is x, returns y",
         input:       input{someArg: "foo"},
         expected:    expected{someReturnArg: nil},
     },

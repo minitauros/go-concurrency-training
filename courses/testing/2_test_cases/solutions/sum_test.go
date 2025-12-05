@@ -3,7 +3,7 @@ package solutions
 import (
 	"testing"
 
-	hygiene "github.com/minitauros/go-concurrency-training/courses/testing/2_hygiene"
+	hygiene "github.com/minitauros/go-concurrency-training/courses/testing/2_test_cases"
 )
 
 func Test_sum(t *testing.T) {

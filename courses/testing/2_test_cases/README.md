@@ -1,18 +1,22 @@
 # Task
 
 In this exercise you will find the same code as in the warmup exercise. However, the test in the warmup exercise is
-broken. It doesn't cover all test cases.
+broken. It only covers the case where the input is `3`, and it doesn't even cover it correctly. Good tests cover all
+possible routes that a code path can take.
 
-It is possible to create a function for each test case, but for this exercise we'll use `t.Run()` to distinguish between
-test cases. For example.
+It is possible to create a separate test function for each of those cases, but for this exercise we'll use `t.Run()` to
+distinguish between test cases. For example:
 
 ```go
-t.Run("Some test case description", func (t) {
+t.Run("If input is lower than 2", func (t) {
     // Test case implementation.
 })
+
+// ...other test cases
 ```
 
-To see if your tests work, tests can be run as follows.
+The task is to implement all possible test cases using `t.Run()` to distinguish between cases. To see if your tests
+work, tests can be run as follows.
 
 ```
 go test -v .

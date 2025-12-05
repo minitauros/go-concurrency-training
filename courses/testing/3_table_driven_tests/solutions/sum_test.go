@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	table_driven "github.com/minitauros/go-concurrency-training/courses/testing/3_table_driven"
+	table_driven "github.com/minitauros/go-concurrency-training/courses/testing/3_table_driven_tests"
 )
 
 func Test_Sum(t *testing.T) {
