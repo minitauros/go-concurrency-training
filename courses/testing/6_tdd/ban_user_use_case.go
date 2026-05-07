@@ -14,7 +14,7 @@ const (
 type BanReason string
 
 const (
-	BanReasonRandom = "rolled_the_dice"
+	BanReasonRandom BanReason = "rolled_the_dice"
 )
 
 type User struct {

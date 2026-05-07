@@ -16,8 +16,6 @@ func Test_Calculator_Multiply(t *testing.T) {
 }
 
 func Test_Calculator_SpecialSub(t *testing.T) {
-	assert := assert.New(t)
-
 	testCases := []struct {
 		description string
 		start       int64
@@ -64,6 +62,7 @@ func Test_Calculator_SpecialSub(t *testing.T) {
 
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
+			assert := assert.New(t)
 			calculator := &Calculator{}
 			res := calculator.SpecialSub(tc.start, tc.sub)
 			assert.Equal(tc.expected, res)

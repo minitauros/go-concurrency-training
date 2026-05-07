@@ -26,19 +26,21 @@ func (c *Consumer) Start() error {
 		go func() {
 			defer c.stopWg.Done()
 
-			select {
-			case <-c.stopCh:
-				return
-			default:
-				msg := c.client.ReadMessage()
-				fmt.Println("read message: ", msg)
-
-				newVal := c.numRead.Add(1)
-				if int(newVal) == c.maxNumRead {
+			for {
+				select {
+				case <-c.stopCh:
 					return
-				}
+				default:
+					msg := c.client.ReadMessage()
+					fmt.Println("read message: ", msg)
 
-				time.Sleep(c.sleepTime)
+					newVal := c.numRead.Add(1)
+					if int(newVal) == c.maxNumRead {
+						return
+					}
+
+					time.Sleep(c.sleepTime)
+				}
 			}
 		}()
 	}

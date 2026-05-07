@@ -40,13 +40,19 @@ func TestChannels2(t *testing.T) {
 	go channels2(inputCh, outputCh)
 
 	res := make([]string, 0, len(input))
-	go func() {
-		for s := range outputCh {
-			res = append(res, s)
+loop:
+	for {
+		select {
+		case val, ok := <-outputCh:
+			if !ok {
+				break loop
+			}
+			res = append(res, val)
+		case <-time.After(50 * time.Millisecond):
+			break loop
 		}
-	}()
+	}
 
-	time.Sleep(50 * time.Millisecond)
 	if !reflect.DeepEqual(input, res) {
 		t.Errorf("got %v, expected %v", res, input)
 	}

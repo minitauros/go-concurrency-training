@@ -66,6 +66,9 @@ func (uc *BanUserUseCase) Ban(ctx context.Context, userID int64) error {
 		ID:     user.ID,
 		Reason: BanReasonRandom,
 	})
+	if err != nil {
+		return err
+	}
 
 	return uc.Publisher.Publish(ctx, jsonBytes)
 }

@@ -20,7 +20,7 @@ someMock.Expect(someMethod).ToBeCalled(once).WithArgs(someArgs...).AndReturn(som
 Testify comes with some mocking functionality out of the box, but it still requires you to write your own mocks. In this assignment we'll generate our mock code to speed things up a little, using [Mockery](https://vektra.github.io/mockery/latest/), which actually uses Testify's libraries under the hood. Install it as follows.
 
 ```shell
-go get -tool -modfile=../../../tools.mod //go:generate github.com/vektra/mockery/v3
+go get -tool -modfile=../../../tools.mod github.com/vektra/mockery/v3
 ```
 
 Since it's already part of the tools.mod files, as in the previous exercises, this command will probably not change any files.
