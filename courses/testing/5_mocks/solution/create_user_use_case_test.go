@@ -29,6 +29,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 				So(id, ShouldEqual, 0)
 			})
 		})
+
 		Convey("If the username is too long", func() {
 			username := strings.Repeat("a", 21)
 

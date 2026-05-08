@@ -29,7 +29,7 @@ func (u User) IsBanned() bool {
 
 type UserBannedMessage struct {
 	ID     int64
-	Reason string
+	Reason BanReason
 }
 
 type UserRepo interface {
