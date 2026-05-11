@@ -14,7 +14,6 @@ func SumConcurrentUsingMutex(input []int) int {
 			mux.Lock()
 			sum += num
 			mux.Unlock()
-			wg.Done()
 		})
 	}
 
