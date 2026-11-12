@@ -31,7 +31,7 @@ func Test_Calculator_Sum(t *testing.T) {
 	Convey("Calculator.Sum()", t, func() {
 		for i, tc := range testCases {
 			Convey(fmt.Sprintf("%d: %s", i, tc.description), func() {
-				calculator := &frameworks_convey.Calculator{}
+				calculator := &frameworksconvey.Calculator{}
 				res := calculator.Sum(tc.inputs...)
 				So(res, ShouldEqual, tc.expected)
 			})
@@ -63,7 +63,7 @@ func Test_Calculator_Multiply(t *testing.T) {
 	Convey("Calculator.Multiply()", t, func() {
 		for i, tc := range testCases {
 			Convey(fmt.Sprintf("%d: %s", i, tc.description), func() {
-				calculator := &frameworks_convey.Calculator{}
+				calculator := &frameworksconvey.Calculator{}
 				res := calculator.Multiply(tc.start, tc.multiplyBy)
 				So(res, ShouldEqual, tc.expected)
 			})
@@ -73,7 +73,7 @@ func Test_Calculator_Multiply(t *testing.T) {
 
 func Test_Calculator_SpecialSub(t *testing.T) {
 	Convey("Calculator.SpecialSub()", t, func() {
-		calculator := &frameworks_convey.Calculator{}
+		calculator := &frameworksconvey.Calculator{}
 		var input, subtract int64
 
 		Convey("If the input is above 0", func() {
