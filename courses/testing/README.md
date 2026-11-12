@@ -63,7 +63,7 @@ testable code. It also ensures you actually write tests instead of putting them 
 
 ## AI Prompts
 
-- Give me an overview of the five most uses types of testing in software applications and explain which to use when.
+- Give me an overview of the five most used types of testing in software applications and explain which to use when.
 - Explain the trade-offs between 100% test coverage in software applications versus not reaching 100%.
 - Convince me that I do not need to write a unit test for every piece of code that I write.
 - Convince me that I should write a unit test for every piece of code that I write.

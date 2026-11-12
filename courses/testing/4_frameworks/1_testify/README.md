@@ -51,4 +51,4 @@ task test-solution
 
 ## AI Prompts
 
-* Show me an example of table driven tests in Go, the programming language.
+* Explain the difference between Testify's `assert` and `require` packages in Go, and when to use which.

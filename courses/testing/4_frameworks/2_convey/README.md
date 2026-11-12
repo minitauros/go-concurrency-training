@@ -58,4 +58,4 @@ task test-solution
 
 ## AI Prompts
 
-* Show me an example of table driven tests in Go, the programming language.
+* Explain the execution order of nested `Convey()` blocks in GoConvey, and show an example in Go.
