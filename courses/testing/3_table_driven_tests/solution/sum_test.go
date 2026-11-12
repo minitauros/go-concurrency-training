@@ -14,13 +14,18 @@ func Test_Sum(t *testing.T) {
 		expected    error
 	}{
 		{
-			description: "Input equal to 1",
+			description: "If input is lower than 2, returns error",
 			input:       1,
 			expected:    table_driven.SomeErr,
 		},
 		{
-			description: "Input higher than 1",
+			description: "If input is equal to 2, returns nil",
 			input:       2,
+			expected:    nil,
+		},
+		{
+			description: "If input is higher than 2, returns nil",
+			input:       3,
 			expected:    nil,
 		},
 	}
