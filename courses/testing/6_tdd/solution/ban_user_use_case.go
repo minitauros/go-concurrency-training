@@ -15,7 +15,7 @@ const (
 type BanReason string
 
 const (
-	BanReasonRandom = "rolled_the_dice"
+	BanReasonRandom BanReason = "rolled_the_dice"
 )
 
 type User struct {
@@ -30,7 +30,7 @@ func (u User) IsBanned() bool {
 
 type UserBannedMessage struct {
 	ID     int64
-	Reason string
+	Reason BanReason
 }
 
 type UserRepo interface {

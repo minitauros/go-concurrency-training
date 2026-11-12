@@ -8,7 +8,7 @@ It is possible to create a separate test function for each of those cases, but f
 distinguish between test cases. For example:
 
 ```go
-t.Run("If input is lower than 2", func (t) {
+t.Run("If input is lower than 2", func(t *testing.T) {
     // Test case implementation.
 })
 

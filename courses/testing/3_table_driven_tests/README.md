@@ -26,8 +26,8 @@ testCases := []struct {
 for i, tc := range testCases {
 	t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
 		res := someFunc(tc.input)
-		if res != tc.expected {
-			t.Errorf("expected: %v; got: %v", tc.expected, res)
+		if res != tc.expected.someReturnArg {
+			t.Errorf("expected: %v; got: %v", tc.expected.someReturnArg, res)
 		}
 	})
 }
