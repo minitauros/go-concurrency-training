@@ -1,4 +1,4 @@
-package frameworks_testify
+package frameworkstestify
 
 import (
 	"fmt"

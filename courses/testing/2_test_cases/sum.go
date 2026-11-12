@@ -1,4 +1,4 @@
-package test_cases
+package testcases
 
 import (
 	"errors"
