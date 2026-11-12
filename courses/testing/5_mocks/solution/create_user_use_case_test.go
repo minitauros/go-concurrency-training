@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	mocks2 "github.com/minitauros/go-concurrency-training/courses/testing/5_mocks"
+	mocking "github.com/minitauros/go-concurrency-training/courses/testing/5_mocks"
 	"github.com/minitauros/go-concurrency-training/courses/testing/5_mocks/mocks"
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -15,7 +15,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 	Convey("CreateUserUseCase.CreateUser()", t, func() {
 		ctx := context.Background()
 		userRepo := mocks.NewMockUserRepository(t)
-		uc := &mocks2.CreateUserUseCase{
+		uc := &mocking.CreateUserUseCase{
 			Repo: userRepo,
 		}
 
@@ -25,7 +25,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 			Convey("Returns error", func() {
 				id, err := uc.CreateUser(ctx, username)
 
-				So(err, ShouldWrap, mocks2.ErrUsernameNotAllowed)
+				So(err, ShouldWrap, mocking.ErrUsernameNotAllowed)
 				So(id, ShouldEqual, 0)
 			})
 		})
@@ -36,7 +36,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 			Convey("Returns error", func() {
 				id, err := uc.CreateUser(ctx, username)
 
-				So(err, ShouldWrap, mocks2.ErrUsernameTooLong)
+				So(err, ShouldWrap, mocking.ErrUsernameTooLong)
 				So(id, ShouldEqual, 0)
 			})
 		})
@@ -47,7 +47,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 
 				Convey("If the user cannot be created in the db", func() {
 					expectedErr := errors.New("something went wrong")
-					user := mocks2.User{
+					user := mocking.User{
 						Username: username,
 					}
 					userRepo.EXPECT().CreateUser(ctx, user).Return(0, expectedErr).Once()
@@ -63,7 +63,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 				Convey("If the user can be created in the db", func() {
 					expectedUserID := int64(123)
 					userRepo.EXPECT().
-						CreateUser(ctx, mocks2.User{Username: username}).
+						CreateUser(ctx, mocking.User{Username: username}).
 						Return(expectedUserID, nil).Once()
 
 					Convey("Returns no error", func() {
@@ -72,6 +72,21 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 						So(err, ShouldBeNil)
 						So(id, ShouldEqual, expectedUserID)
 					})
+				})
+			})
+
+			Convey("If the username is at the maximum allowed length in characters, but longer in bytes", func() {
+				username := strings.Repeat("é", 20)
+				expectedUserID := int64(123)
+				userRepo.EXPECT().
+					CreateUser(ctx, mocking.User{Username: username}).
+					Return(expectedUserID, nil).Once()
+
+				Convey("Returns no error", func() {
+					id, err := uc.CreateUser(ctx, username)
+
+					So(err, ShouldBeNil)
+					So(id, ShouldEqual, expectedUserID)
 				})
 			})
 		})

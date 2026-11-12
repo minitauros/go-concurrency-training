@@ -39,7 +39,7 @@ func (_m *MockUserRepository) EXPECT() *MockUserRepository_Expecter {
 }
 
 // CreateUser provides a mock function for the type MockUserRepository
-func (_mock *MockUserRepository) CreateUser(ctx context.Context, user mocks.User) (int64, error) {
+func (_mock *MockUserRepository) CreateUser(ctx context.Context, user mocking.User) (int64, error) {
 	ret := _mock.Called(ctx, user)
 
 	if len(ret) == 0 {
@@ -48,15 +48,15 @@ func (_mock *MockUserRepository) CreateUser(ctx context.Context, user mocks.User
 
 	var r0 int64
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, mocks.User) (int64, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, mocking.User) (int64, error)); ok {
 		return returnFunc(ctx, user)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, mocks.User) int64); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, mocking.User) int64); ok {
 		r0 = returnFunc(ctx, user)
 	} else {
 		r0 = ret.Get(0).(int64)
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, mocks.User) error); ok {
+	if returnFunc, ok := ret.Get(1).(func(context.Context, mocking.User) error); ok {
 		r1 = returnFunc(ctx, user)
 	} else {
 		r1 = ret.Error(1)
@@ -71,20 +71,20 @@ type MockUserRepository_CreateUser_Call struct {
 
 // CreateUser is a helper method to define mock.On call
 //   - ctx context.Context
-//   - user mocks.User
+//   - user mocking.User
 func (_e *MockUserRepository_Expecter) CreateUser(ctx interface{}, user interface{}) *MockUserRepository_CreateUser_Call {
 	return &MockUserRepository_CreateUser_Call{Call: _e.mock.On("CreateUser", ctx, user)}
 }
 
-func (_c *MockUserRepository_CreateUser_Call) Run(run func(ctx context.Context, user mocks.User)) *MockUserRepository_CreateUser_Call {
+func (_c *MockUserRepository_CreateUser_Call) Run(run func(ctx context.Context, user mocking.User)) *MockUserRepository_CreateUser_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 mocks.User
+		var arg1 mocking.User
 		if args[1] != nil {
-			arg1 = args[1].(mocks.User)
+			arg1 = args[1].(mocking.User)
 		}
 		run(
 			arg0,
@@ -99,7 +99,7 @@ func (_c *MockUserRepository_CreateUser_Call) Return(id int64, err error) *MockU
 	return _c
 }
 
-func (_c *MockUserRepository_CreateUser_Call) RunAndReturn(run func(ctx context.Context, user mocks.User) (int64, error)) *MockUserRepository_CreateUser_Call {
+func (_c *MockUserRepository_CreateUser_Call) RunAndReturn(run func(ctx context.Context, user mocking.User) (int64, error)) *MockUserRepository_CreateUser_Call {
 	_c.Call.Return(run)
 	return _c
 }
