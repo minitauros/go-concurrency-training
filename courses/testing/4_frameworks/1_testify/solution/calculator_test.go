@@ -24,6 +24,21 @@ func Test_Calculator_Sum(t *testing.T) {
 			inputs:      []int64{-1, -2, -4},
 			expected:    -7,
 		},
+		{
+			description: "Works with mixed signs",
+			inputs:      []int64{5, -3},
+			expected:    2,
+		},
+		{
+			description: "If given a single value, returns that value",
+			inputs:      []int64{5},
+			expected:    5,
+		},
+		{
+			description: "If given no values, returns zero",
+			inputs:      nil,
+			expected:    0,
+		},
 	}
 
 	for i, tc := range testCases {
@@ -54,6 +69,18 @@ func Test_Calculator_Multiply(t *testing.T) {
 			start:       -10,
 			multiplyBy:  -8,
 			expected:    80,
+		},
+		{
+			description: "Works with mixed signs",
+			start:       -10,
+			multiplyBy:  8,
+			expected:    -80,
+		},
+		{
+			description: "If multiplied by zero, returns zero",
+			start:       10,
+			multiplyBy:  0,
+			expected:    0,
 		},
 	}
 
