@@ -13,12 +13,7 @@ import (
 
 func Test_BanUserUseCase_Ban(t *testing.T) {
 	t.Run("if an error happens while fetching the user from the db, returns error", func(t *testing.T) {
-		userRepo := mocks.NewMockUserRepo(t)
-		publisher := mocks.NewMockPublisher(t)
-		uc := &tdd.BanUserUseCase{
-			Repo:      userRepo,
-			Publisher: publisher,
-		}
+		uc, userRepo, _ := newBanUserUseCase(t)
 
 		ctx := context.Background()
 		userID := int64(123)
@@ -31,12 +26,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 	})
 
 	t.Run("if the user is already banned, returns nil", func(t *testing.T) {
-		userRepo := mocks.NewMockUserRepo(t)
-		publisher := mocks.NewMockPublisher(t)
-		uc := &tdd.BanUserUseCase{
-			Repo:      userRepo,
-			Publisher: publisher,
-		}
+		uc, userRepo, _ := newBanUserUseCase(t)
 
 		ctx := context.Background()
 		user := tdd.User{
@@ -48,16 +38,11 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 		userRepo.EXPECT().GetUser(ctx, user.ID).Return(user, nil).Once()
 
 		err := uc.Ban(ctx, user.ID)
-		assert.Nil(t, err)
+		assert.NoError(t, err)
 	})
 
 	t.Run("if the user is not already banned, but banning fails, returns error", func(t *testing.T) {
-		userRepo := mocks.NewMockUserRepo(t)
-		publisher := mocks.NewMockPublisher(t)
-		uc := &tdd.BanUserUseCase{
-			Repo:      userRepo,
-			Publisher: publisher,
-		}
+		uc, userRepo, _ := newBanUserUseCase(t)
 
 		ctx := context.Background()
 		user := tdd.User{
@@ -75,12 +60,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 	})
 
 	t.Run("if banning succeeds, but publishing the 'user banned' message fails, returns error", func(t *testing.T) {
-		userRepo := mocks.NewMockUserRepo(t)
-		publisher := mocks.NewMockPublisher(t)
-		uc := &tdd.BanUserUseCase{
-			Repo:      userRepo,
-			Publisher: publisher,
-		}
+		uc, userRepo, publisher := newBanUserUseCase(t)
 
 		ctx := context.Background()
 		user := tdd.User{
@@ -107,12 +87,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 	})
 
 	t.Run("if publishing the 'user banned' message succeeds, returns nil", func(t *testing.T) {
-		userRepo := mocks.NewMockUserRepo(t)
-		publisher := mocks.NewMockPublisher(t)
-		uc := &tdd.BanUserUseCase{
-			Repo:      userRepo,
-			Publisher: publisher,
-		}
+		uc, userRepo, publisher := newBanUserUseCase(t)
 
 		ctx := context.Background()
 		user := tdd.User{
@@ -134,6 +109,18 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 		publisher.EXPECT().Publish(ctx, userBannedMessageBytes).Return(nil).Once()
 
 		err = uc.Ban(ctx, user.ID)
-		assert.Nil(t, err)
+		assert.NoError(t, err)
 	})
+}
+
+// newBanUserUseCase always sets up both mocks, also for test cases that expect no calls on one of them, so that an
+// unexpected call fails the test.
+func newBanUserUseCase(t *testing.T) (*tdd.BanUserUseCase, *mocks.MockUserRepo, *mocks.MockPublisher) {
+	userRepo := mocks.NewMockUserRepo(t)
+	publisher := mocks.NewMockPublisher(t)
+	uc := &tdd.BanUserUseCase{
+		Repo:      userRepo,
+		Publisher: publisher,
+	}
+	return uc, userRepo, publisher
 }
