@@ -25,7 +25,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 			Convey("Returns error", func() {
 				id, err := uc.CreateUser(ctx, username)
 
-				So(err, ShouldEqual, mocks2.ErrUsernameNotAllowed)
+				So(err, ShouldWrap, mocks2.ErrUsernameNotAllowed)
 				So(id, ShouldEqual, 0)
 			})
 		})
@@ -36,7 +36,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 			Convey("Returns error", func() {
 				id, err := uc.CreateUser(ctx, username)
 
-				So(err, ShouldEqual, mocks2.ErrUsernameTooLong)
+				So(err, ShouldWrap, mocks2.ErrUsernameTooLong)
 				So(id, ShouldEqual, 0)
 			})
 		})
@@ -55,7 +55,7 @@ func Test_CreateUserUseCase_CreateUser(t *testing.T) {
 					Convey("Returns error", func() {
 						id, err := uc.CreateUser(ctx, username)
 
-						So(err, ShouldEqual, expectedErr)
+						So(err, ShouldWrap, expectedErr)
 						So(id, ShouldEqual, 0)
 					})
 				})
