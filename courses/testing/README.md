@@ -11,8 +11,7 @@ files and run with `go test`.
 ## Test suite
 
 A test suite is a collection of test cases that are run together. In general software terms, it's any group of tests
-that
-verify related functionality or the entire application.
+that verify related functionality or the entire application.
 
 In Go, a test suite typically refers to all the `*_test.go` files in a package or directory. When you run `go test`, it
 executes all tests in the current package—that's your test suite. You can also run tests across multiple packages with
@@ -64,9 +63,9 @@ testable code. It also ensures you actually write tests instead of putting them 
 
 ## AI Prompts
 
-* Give me an overview of the five most uses types of testing in software applications and explain which to use when.
-* Explain the trade-offs between 100% test coverage in software applications versus not reaching 100%.
-* Convince me that I do not need to write a unit test for every piece of code that I write.
-* Convince me that I should write a unit test for every piece of code that I write.
+- Give me an overview of the five most uses types of testing in software applications and explain which to use when.
+- Explain the trade-offs between 100% test coverage in software applications versus not reaching 100%.
+- Convince me that I do not need to write a unit test for every piece of code that I write.
+- Convince me that I should write a unit test for every piece of code that I write.
 
 **Disclaimer:** This file was partially written using AI.
