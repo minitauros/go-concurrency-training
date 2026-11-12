@@ -1,6 +1,7 @@
 package solution
 
 import (
+	"errors"
 	"fmt"
 	"testing"
 
@@ -28,7 +29,7 @@ func Test_Sum(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
 			res := table_driven.Sum(tc.input)
-			if res != tc.expected {
+			if !errors.Is(res, tc.expected) {
 				t.Errorf("expected: %v; got: %v", tc.expected, res)
 			}
 		})

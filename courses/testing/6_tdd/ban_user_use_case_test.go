@@ -27,8 +27,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 		userRepo.EXPECT().GetUser(ctx, userID).Return(tdd.User{}, expectedErr).Once()
 
 		err := uc.Ban(ctx, userID)
-		assert.Error(t, err)
-		assert.Equal(t, expectedErr, err)
+		assert.ErrorIs(t, err, expectedErr)
 	})
 
 	t.Run("if the user is already banned, returns nil", func(t *testing.T) {
@@ -72,8 +71,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 		userRepo.EXPECT().Ban(ctx, user.ID).Return(expectedErr).Once()
 
 		err := uc.Ban(ctx, user.ID)
-		assert.Error(t, err)
-		assert.Equal(t, expectedErr, err)
+		assert.ErrorIs(t, err, expectedErr)
 	})
 
 	t.Run("if banning succeeds, but publishing the 'user banned' message fails, returns error", func(t *testing.T) {
@@ -105,8 +103,7 @@ func Test_BanUserUseCase_Ban(t *testing.T) {
 		publisher.EXPECT().Publish(ctx, userBannedMessageBytes).Return(expectedErr).Once()
 
 		err = uc.Ban(ctx, user.ID)
-		assert.Error(t, err)
-		assert.Equal(t, expectedErr, err)
+		assert.ErrorIs(t, err, expectedErr)
 	})
 
 	t.Run("if publishing the 'user banned' message succeeds, returns nil", func(t *testing.T) {
