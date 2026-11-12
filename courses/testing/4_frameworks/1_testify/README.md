@@ -34,6 +34,23 @@ func TestFoo(t *testing.T) {
 }
 ```
 
+Testify also has a `require` package with the same functions. The difference is what happens when an assertion fails:
+`assert` marks the test as failed and continues, while `require` stops the test immediately. Use `require` when the
+rest of the test makes no sense after a failure, for example when a setup step returns an error, or when a value that
+the next lines dereference is `nil`:
+
+```go
+func TestFoo(t *testing.T) {
+    user, err := repo.GetUser(ctx, 123)
+    require.NoError(t, err)  // Stops here if err != nil.
+    require.NotNil(t, user)  // Stops here if user == nil, so the next line can't panic.
+    assert.Equal(t, "foo", user.Username)
+}
+```
+
+`require` stops the test by calling `t.FailNow()`, which only works from the goroutine that runs the test. In other
+goroutines, use `assert`.
+
 First, implement the methods of `Calculator` in calculator.go in this directory. Then, using the `assert` package,
 write tests for the implementations. The `SpecialSub()` methods has already been implemented and tested as an example.
 
