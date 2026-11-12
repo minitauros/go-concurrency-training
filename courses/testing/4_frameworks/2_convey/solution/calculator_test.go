@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/minitauros/go-concurrency-training/courses/testing/4_frameworks/2_convey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -30,7 +31,7 @@ func Test_Calculator_Sum(t *testing.T) {
 	Convey("Calculator.Sum()", t, func() {
 		for i, tc := range testCases {
 			Convey(fmt.Sprintf("%d: %s", i, tc.description), func() {
-				calculator := &Calculator{}
+				calculator := &frameworks_convey.Calculator{}
 				res := calculator.Sum(tc.inputs...)
 				So(res, ShouldEqual, tc.expected)
 			})
@@ -62,7 +63,7 @@ func Test_Calculator_Multiply(t *testing.T) {
 	Convey("Calculator.Multiply()", t, func() {
 		for i, tc := range testCases {
 			Convey(fmt.Sprintf("%d: %s", i, tc.description), func() {
-				calculator := &Calculator{}
+				calculator := &frameworks_convey.Calculator{}
 				res := calculator.Multiply(tc.start, tc.multiplyBy)
 				So(res, ShouldEqual, tc.expected)
 			})
@@ -72,7 +73,7 @@ func Test_Calculator_Multiply(t *testing.T) {
 
 func Test_Calculator_SpecialSub(t *testing.T) {
 	Convey("Calculator.SpecialSub()", t, func() {
-		calculator := &Calculator{}
+		calculator := &frameworks_convey.Calculator{}
 		var input, subtract int64
 
 		Convey("If the input is above 0", func() {

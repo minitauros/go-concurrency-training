@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/minitauros/go-concurrency-training/courses/testing/4_frameworks/1_testify"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -28,7 +29,7 @@ func Test_Calculator_Sum(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
 			assert := assert.New(t)
-			calculator := &Calculator{}
+			calculator := &frameworks_testify.Calculator{}
 			res := calculator.Sum(tc.inputs...)
 			assert.Equal(tc.expected, res)
 		})
@@ -59,7 +60,7 @@ func Test_Calculator_Multiply(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
 			assert := assert.New(t)
-			calculator := &Calculator{}
+			calculator := &frameworks_testify.Calculator{}
 			res := calculator.Multiply(tc.start, tc.multiplyBy)
 			assert.Equal(tc.expected, res)
 		})
@@ -114,7 +115,7 @@ func Test_Calculator_SpecialSub(t *testing.T) {
 	for i, tc := range testCases {
 		t.Run(fmt.Sprintf("%d: %s", i, tc.description), func(t *testing.T) {
 			assert := assert.New(t)
-			calculator := &Calculator{}
+			calculator := &frameworks_testify.Calculator{}
 			res := calculator.SpecialSub(tc.start, tc.sub)
 			assert.Equal(tc.expected, res)
 		})
