@@ -68,4 +68,19 @@ testable code. It also ensures you actually write tests instead of putting them 
 - Convince me that I do not need to write a unit test for every piece of code that I write.
 - Convince me that I should write a unit test for every piece of code that I write.
 
+## Done early?
+
+Here are some AI prompts to help you learn other testing topics:
+
+1. Generate a test for me in this repository that teaches me how to test concurrent code in Go, using the race detector
+   and the `testing/synctest` package.
+2. Generate a fuzz test for me in this repository that teaches me how fuzzing works in Go and what kind of bugs it
+   finds that table-driven tests miss.
+3. Generate a benchmark for me in this repository that teaches me how to measure and compare the performance of two
+   implementations, and how to read the output of `go test -bench`.
+4. Generate a test for me in this repository that teaches me how to test an HTTP handler and an HTTP client using the
+   `net/http/httptest` package.
+5. Generate an integration test for me in this repository that teaches me how to test against a real database using
+   Testcontainers, and how to keep it separate from the unit tests.
+
 **Disclaimer:** This file was partially written using AI.
